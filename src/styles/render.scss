@@ -1,0 +1,120 @@
+@function strip-units($number) {
+
+	@return $number / ($number * 0 + 1);
+}
+
+$base-font-size: 28px !default;
+$small-font-size: 14px !default;
+
+@function px2em($target-size, $context:$base-font-size) {
+
+	@if not unitless($target-size) {
+		$target-size: strip-units($target-size);
+	}
+
+	@if not unitless($context) {
+		$context: strip-units($context);
+	}
+
+	@return ($target-size / $context) * 1em;
+}
+
+.wp-block-inline-post {
+	display: block;
+	width: 100%;
+	font-size: $base-font-size;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+	line-height: 1.8;
+
+	@media (max-width: 768px - 1px) {
+		font-size: $small-font-size;
+	}
+
+	.block-inline-post {
+		display: flex;
+		margin: px2em(16) 0;
+		padding: px2em(16);
+		border: solid 1px rgba($color: #000000, $alpha: 0.65);
+	}
+
+	.block-inline-post-media {
+		flex-shrink: 0;
+		width: px2em(160);
+		height: px2em(130);
+		margin: 0 px2em(16) 0 0;
+		padding: 0;
+		background: #f4f4f4 none center center no-repeat / cover;
+
+		@media (max-width: 768px - 1px) {
+			width: px2em(80, 16);
+			height: px2em(80, 16);
+		}
+	}
+
+	.block-inline-post-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		height: px2em(130);
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+
+		@media (max-width: 768px - 1px) {
+			height: px2em(80, 16);
+		}
+
+		& > * {
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+	.block-inlie-post-title {
+		display: block;
+		max-width: 100%;
+		height: px2em(40, 22);
+		overflow: hidden;
+		color: #000000;
+		font-weight: 800;
+		font-size: px2em(22);
+		line-height: px2em(40, 22);
+		white-space: nowrap;
+		text-overflow: ellipsis;
+
+		@media (max-width: 768px - 1px) {
+			font-size: px2em(16, 16);
+		}
+	}
+
+	.block-inline-post-excerpt {
+		height: px2em(50, 14);
+		overflow: hidden;
+		color: rgba($color: #000000, $alpha: 0.45);
+		font-size: px2em(14);
+
+		@media (max-width: 768px - 1px) {
+			height: px2em(25, 14);
+		}
+	}
+
+	.block-inline-post-read-more {
+		position: relative;
+		display: flex;
+		align-items: center;
+		font-size: px2em(14);
+
+		&::before {
+			display: block;
+			width: px2em(60, 14);
+			margin-right: px2em(16);
+			border-bottom: solid 1px;
+			content: '';
+		}
+
+		& a {
+			margin: 0;
+			padding: 0;
+		}
+	}
+}
